@@ -45,6 +45,31 @@
     return result;
 }
 
+- (double) evalFunction:(NSString *)function {
+    double result = [self popOperand];
+    
+    if ([function isEqualToString:@"sin"])
+        result = sin(result);
+    else  if ([function isEqualToString:@"cos"])
+        result = cos(result);
+    else  if ([function isEqualToString:@"sqrt"])
+        result = sqrt(result);
+
+    [self pushOperand:result];
+    return result;
+}
+
+- (double) pushConstant:(NSString *)constant {
+    double result = 0;
+    
+    if ([constant isEqualToString:@"Pi"]) {
+        result = 3.1415;
+        [self pushOperand:result];        
+    }
+    
+    return result;
+}
+
 - (NSMutableArray *)operandStack {
     if (!_operandStack)
         _operandStack = [[NSMutableArray alloc] init];
