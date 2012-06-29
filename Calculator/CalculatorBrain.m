@@ -46,7 +46,7 @@
     else  if ([operation isEqualToString:@"sqrt"])
         result = sqrt(result);
     else  if ([operation isEqualToString:@"Pi"]) 
-        result = 3.1415;
+        result = M_PI;
 
     [self pushOperand:result];
     
