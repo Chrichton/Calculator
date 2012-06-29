@@ -39,33 +39,16 @@
         result = [self popOperand] - [self popOperand];  
     else if ([operation isEqualToString:@"/"])
         result = [self popOperand] / [self popOperand];  
-    
-    [self pushOperand:result];
-    
-    return result;
-}
-
-- (double) evalFunction:(NSString *)function {
-    double result = [self popOperand];
-    
-    if ([function isEqualToString:@"sin"])
+    else if ([operation isEqualToString:@"sin"])
         result = sin(result);
-    else  if ([function isEqualToString:@"cos"])
+    else  if ([operation isEqualToString:@"cos"])
         result = cos(result);
-    else  if ([function isEqualToString:@"sqrt"])
+    else  if ([operation isEqualToString:@"sqrt"])
         result = sqrt(result);
+    else  if ([operation isEqualToString:@"Pi"]) 
+        result = 3.1415;
 
     [self pushOperand:result];
-    return result;
-}
-
-- (double) pushConstant:(NSString *)constant {
-    double result = 0;
-    
-    if ([constant isEqualToString:@"Pi"]) {
-        result = 3.1415;
-        [self pushOperand:result];        
-    }
     
     return result;
 }

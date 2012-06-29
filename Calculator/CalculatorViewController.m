@@ -50,21 +50,9 @@
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
-- (IBAction)functionPressed:(UIButton *)sender {
-    double result = [self.brain evalFunction: sender.currentTitle];
-    NSString *resultString = [NSString stringWithFormat:@"%g", result];
-    self.display.text = resultString;
-    self.userIsInTheMiddleOfEnteringANumber = NO;   
-}
-
-- (IBAction)piPressed:(UIButton *)sender {
-    double result = [self.brain pushConstant:sender.currentTitle];
-    NSString *resultString = [NSString stringWithFormat:@"%g", result];
-    self.display.text = resultString;
-    self.userIsInTheMiddleOfEnteringANumber = NO;
-}
-
 - (IBAction)clearPressed:(id)sender {
+    self.display.text = @"0";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (void)viewDidUnload {

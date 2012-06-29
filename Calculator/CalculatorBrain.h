@@ -12,6 +12,4 @@
 
 - (void) pushOperand:(double)operand;
 - (double) performOperation:(NSString *)operation;
-- (double) evalFunction:(NSString *)function;
-- (double) pushConstant:(NSString *)constant;
 @end
