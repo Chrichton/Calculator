@@ -53,6 +53,27 @@
     return result;
 }
 
+- (BOOL) isValidNumber:(NSString *)number
+{
+    if (!number)
+        return NO;
+    
+    if (number.length > 1 && [[number substringToIndex:2] isEqualToString:@"00"])
+        return NO; 
+                  
+    if (number.length > 2 && [[number substringToIndex:3] isEqualToString:@"-00"])
+        return NO;     
+        
+    NSRange range = [number rangeOfString:@"."];
+    if (range.length == 1) {
+        range = [[number substringFromIndex:range.location +1] rangeOfString:@"."]; // No Lenght-Check neccessary, because string null terminated
+        if (range.length == 1)
+            return NO;
+    }
+        
+    return YES;
+}
+
 - (NSMutableArray *)operandStack {
     if (!_operandStack)
         _operandStack = [[NSMutableArray alloc] init];

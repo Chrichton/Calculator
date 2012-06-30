@@ -12,4 +12,5 @@
 
 - (void) pushOperand:(double)operand;
 - (double) performOperation:(NSString *)operation;
+- (BOOL) isValidNumber:(NSString *)number;
 @end
