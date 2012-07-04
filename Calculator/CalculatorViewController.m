@@ -33,10 +33,12 @@
         NSString *newNumber = [self.display.text stringByAppendingString:digit];
         if ([self.brain isValidNumber:newNumber]) {  
             self.display.text = newNumber; 
+            self.history.text = [self.history.text stringByAppendingString:digit];
         }
     } else {
         self.display.text = digit;
         self.userIsInTheMiddleOfEnteringANumber = YES;
+        self.history.text = [self.history.text stringByAppendingString:digit];
     }
 }
 
@@ -47,16 +49,19 @@
     double result =[self.brain performOperation:sender.currentTitle];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
+    self.history.text = [self.history.text stringByAppendingFormat:@"%@ ", sender.currentTitle];
 }
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]]; 
     self.userIsInTheMiddleOfEnteringANumber = NO;
+    self.history.text = [self.history.text stringByAppendingString:@" "];
 }
 
 - (IBAction)clearPressed:(id)sender {
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
+    self.history.text = @"";
 }
 
 - (IBAction)backspacePressed:(id)sender {
