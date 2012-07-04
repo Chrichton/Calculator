@@ -49,7 +49,7 @@
     double result =[self.brain performOperation:sender.currentTitle];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
-    self.history.text = [self.history.text stringByAppendingFormat:@"%@ ", sender.currentTitle];
+    self.history.text = [self.history.text stringByAppendingFormat:@"%@ = %@ ", sender.currentTitle, resultString];
 }
 
 - (IBAction)enterPressed {
