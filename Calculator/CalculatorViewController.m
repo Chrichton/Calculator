@@ -72,15 +72,16 @@
         self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
 }
 
-- (IBAction)changeSignPressed:(id)sender {
-    if (self.display.text.length > 0) {
+- (IBAction)changeSignPressed:(UIButton *)sender {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
         if ([[self.display.text substringToIndex:1] isEqualToString:@"-"]) 
             self.display.text = [self.display.text substringFromIndex:1];
         else
             self.display.text = [@"-" stringByAppendingString:self.display.text];
-    }
-    
-    self.history.text = [self.history.text stringByAppendingString:@" CHS "];
+        
+        self.history.text = [self.history.text stringByAppendingString:@" CHS "];
+    } else
+        [self operationPressed:sender];
 }
 
 - (void)viewDidUnload {

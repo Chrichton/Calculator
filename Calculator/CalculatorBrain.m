@@ -51,7 +51,8 @@
         result = sqrt(result);
     else  if ([operation isEqualToString:@"Pi"]) 
         result = M_PI;
-
+    else  if ([operation isEqualToString:@"CHS"]) 
+        result = [self popOperand] * (-1);
     [self pushOperand:result];
     
     return result;
