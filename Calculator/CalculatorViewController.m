@@ -59,6 +59,7 @@
 }
 
 - (IBAction)clearPressed:(id)sender {
+    [self.brain clear]; 
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
     self.history.text = @"";

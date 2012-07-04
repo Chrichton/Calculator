@@ -16,6 +16,10 @@
 @implementation CalculatorBrain
 @synthesize operandStack = _operandStack;
 
+- (void) clear {
+    _operandStack = nil;
+}
+
 - (void) pushOperand:(double)operand {
     [self.operandStack addObject: [NSNumber numberWithDouble:operand]];
 }
