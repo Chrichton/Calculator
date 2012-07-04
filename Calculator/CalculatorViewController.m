@@ -73,6 +73,14 @@
 }
 
 - (IBAction)changeSignPressed:(id)sender {
+    if (self.display.text.length > 0) {
+        if ([[self.display.text substringToIndex:1] isEqualToString:@"-"]) 
+            self.display.text = [self.display.text substringFromIndex:1];
+        else
+            self.display.text = [@"-" stringByAppendingString:self.display.text];
+    }
+    
+    self.history.text = [self.history.text stringByAppendingString:@" CHS "];
 }
 
 - (void)viewDidUnload {
