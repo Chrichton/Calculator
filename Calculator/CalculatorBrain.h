@@ -14,4 +14,10 @@
 - (double) performOperation:(NSString *)operation;
 - (BOOL) isValidNumber:(NSString *)number;
 - (void) clear;
+
+@property (readonly) id program;
+
++ (double)runProgram:(id)program;
++ (NSString *)descriptionOfTheProgram:(id)program;
+
 @end
