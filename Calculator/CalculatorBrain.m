@@ -16,8 +16,50 @@
 @implementation CalculatorBrain
 @synthesize programStack = _programStack;
 
-- (id) program {
-    return self;
++ (NSString *)descriptionOfTheProgram:(id)program {
+    return nil;
+}
+
++ (double)runProgram:(id)program {
+    NSMutableArray *stack;
+    if ([program isKindOfClass: [NSMutableArray class]])
+        stack = [program mutableCopy];
+    
+    return [self popOperandOffStack: stack];
+}
+
++ (double) popOperandOffStack: (NSMutableArray *) stack {
+    double result = 0;
+    
+    id topOfStack = [stack lastObject];
+    if (topOfStack) 
+        [stack removeLastObject];
+    
+    if ([topOfStack isKindOfClass:[NSNumber class]])
+        result = [topOfStack doubleValue];
+    else if ([topOfStack isKindOfClass:[NSString class]]) {
+        NSString *operation = topOfStack;
+        if ([operation isEqualToString:@"+"])
+            result = [self popOperandOffStack: stack] + [self popOperandOffStack: stack];
+        else if ([operation isEqualToString:@"*"])
+            result = [self popOperandOffStack: stack] * [self popOperandOffStack: stack];  
+        else if ([operation isEqualToString:@"-"])
+            result = [self popOperandOffStack: stack] - [self popOperandOffStack: stack];  
+        else if ([operation isEqualToString:@"/"])
+            result = [self popOperandOffStack: stack] / [self popOperandOffStack: stack];  
+        else if ([operation isEqualToString:@"sin"])
+            result = sin(result);
+        else  if ([operation isEqualToString:@"cos"])
+            result = cos(result);
+        else  if ([operation isEqualToString:@"sqrt"])
+            result = sqrt(result);
+        else  if ([operation isEqualToString:@"Pi"]) 
+            result = M_PI;
+        else  if ([operation isEqualToString:@"CHS"]) 
+            result = [self popOperandOffStack: stack] * (-1);
+    }
+        
+    return result;
 }
 
 - (void) clear {
@@ -28,41 +70,9 @@
     [self.programStack addObject: [NSNumber numberWithDouble:operand]];
 }
 
-//- (double) popOperand {
-//    NSNumber *operandobject = [self.programStack lastObject];
-//    if (operandobject)
-//        [self.programStack removeLastObject];
-//    
-//    return [operandobject doubleValue];
-//}
-
 - (double) performOperation:(NSString *)operation {
     [self.programStack addObject:operation];
     return [CalculatorBrain runProgram:self.program];
-    
-    double result = 0;
-    
-    if ([operation isEqualToString:@"+"])
-        result = [self popOperand] + [self popOperand];
-    else if ([operation isEqualToString:@"*"])
-        result = [self popOperand] * [self popOperand];  
-    else if ([operation isEqualToString:@"-"])
-        result = [self popOperand] - [self popOperand];  
-    else if ([operation isEqualToString:@"/"])
-        result = [self popOperand] / [self popOperand];  
-    else if ([operation isEqualToString:@"sin"])
-        result = sin(result);
-    else  if ([operation isEqualToString:@"cos"])
-        result = cos(result);
-    else  if ([operation isEqualToString:@"sqrt"])
-        result = sqrt(result);
-    else  if ([operation isEqualToString:@"Pi"]) 
-        result = M_PI;
-    else  if ([operation isEqualToString:@"CHS"]) 
-        result = [self popOperand] * (-1);
-    [self pushOperand:result];
-    
-    return result;
 }
 
 - (BOOL) isValidNumber:(NSString *)number
@@ -84,6 +94,10 @@
     }
         
     return YES;
+}
+
+- (id) program {
+    return [self.programStack copy];
 }
 
 - (NSMutableArray *)operandStack {
