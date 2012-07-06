@@ -72,4 +72,25 @@ static CalculatorBrain *brain;
     STAssertFalse([brain isValidNumber:@"-00"], @"'-00' invalid"); 
 }
 
+- (void) testRunProgram {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    [program addObject:[NSNumber numberWithInt:3]];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    double d = [CalculatorBrain runProgram: [program copy]];
+    STAssertEqualsWithAccuracy(d, 7.0, 0.000001, @"3+4=7"); 
+}
+
+- (void) testRunProgram_usingVariableValues {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setValue:[NSNumber numberWithInt:3] forKey:@"x"];
+    
+    [program addObject:@"x"];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    double d = [CalculatorBrain runProgram: [program copy] usingVariableValues:dictionary];
+    STAssertEqualsWithAccuracy(d, 7.0, 0.000001, @"3+4=7"); 
+}
+
 @end

@@ -16,8 +16,32 @@
 @implementation CalculatorBrain
 @synthesize programStack = _programStack;
 
++ (BOOL) isVariable:(NSString *) name {
+    return NO;
+}
+
 + (NSString *)descriptionOfTheProgram:(id)program {
     return nil;
+}
+
++ (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
+    NSMutableArray *stack;
+    if ([program isKindOfClass: [NSArray class]])
+        stack = [program mutableCopy];
+
+    for (int i = 0; i < [stack count]; i++) {
+        id element = [stack objectAtIndex:i];
+        if ([element isKindOfClass:[NSString class]]) {
+            if ([self isVariable:element]) {
+                NSNumber *value = [variableValues objectForKey: element];
+                if (!value)
+                    value = [NSNumber numberWithInt:0];
+                element = value;
+            }
+        }
+    }
+    
+    return [self runProgram:stack];
 }
 
 + (double)runProgram:(id)program {
