@@ -100,7 +100,7 @@
     return [self.programStack copy];
 }
 
-- (NSMutableArray *)operandStack {
+- (NSMutableArray *)programStack {
     if (!_programStack)
         _programStack = [[NSMutableArray alloc] init];
     
