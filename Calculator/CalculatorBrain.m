@@ -17,7 +17,9 @@
 @synthesize programStack = _programStack;
 
 + (BOOL) isVariable:(NSString *) name {
-    return NO;
+    NSOrderedSet *operators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", @"sin", @"cos", @"sqrt", @"Pi", @"CHS", nil];
+    
+    return [operators indexOfObject:name] == NSNotFound;
 }
 
 + (NSString *)descriptionOfTheProgram:(id)program {
@@ -36,7 +38,7 @@
                 NSNumber *value = [variableValues objectForKey: element];
                 if (!value)
                     value = [NSNumber numberWithInt:0];
-                element = value;
+                [stack replaceObjectAtIndex:i withObject:value];
             }
         }
     }

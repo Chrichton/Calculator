@@ -93,4 +93,15 @@ static CalculatorBrain *brain;
     STAssertEqualsWithAccuracy(d, 7.0, 0.000001, @"3+4=7"); 
 }
 
+- (void) testRunProgram_usingNoVariableValues {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    
+    [program addObject:@"x"];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    double d = [CalculatorBrain runProgram: [program copy] usingVariableValues:dictionary];
+    STAssertEqualsWithAccuracy(d, 4.0, 0.000001, @"0+4=4"); 
+}
+
 @end
