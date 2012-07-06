@@ -22,7 +22,7 @@
 
 + (double)runProgram:(id)program {
     NSMutableArray *stack;
-    if ([program isKindOfClass: [NSMutableArray class]])
+    if ([program isKindOfClass: [NSArray class]])
         stack = [program mutableCopy];
     
     return [self popOperandOffStack: stack];
@@ -72,6 +72,7 @@
 
 - (double) performOperation:(NSString *)operation {
     [self.programStack addObject:operation];
+    
     return [CalculatorBrain runProgram:self.program];
 }
 
