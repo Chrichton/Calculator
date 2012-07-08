@@ -81,6 +81,15 @@ static CalculatorBrain *brain;
     STAssertEqualsWithAccuracy(d, 7.0, 0.000001, @"3+4=7"); 
 }
 
+- (void) testRunProgramWithVariable {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    [program addObject:@"x"];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    double d = [CalculatorBrain runProgram: [program copy]];
+    STAssertEqualsWithAccuracy(d, 4.0, 0.000001, @"0+4=4"); 
+}
+
 - (void) testRunProgram_usingVariableValues {
     NSMutableArray *program = [[NSMutableArray alloc] init];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
@@ -102,6 +111,28 @@ static CalculatorBrain *brain;
     [program addObject:@"+"];
     double d = [CalculatorBrain runProgram: [program copy] usingVariableValues:dictionary];
     STAssertEqualsWithAccuracy(d, 4.0, 0.000001, @"0+4=4"); 
+}
+
+- (void) testVariablesUsedInProgram {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+        
+    [program addObject:@"x"];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    
+    NSSet *variables = [CalculatorBrain variablesUsedInProgram:program];
+    STAssertEquals(1, [variables count], @"");
+    STAssertEquals(@"x", [variables anyObject], @"one variable 'x'");
+}
+
+- (void) testNoVariablesUsedInProgram {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    
+    NSSet *variables = [CalculatorBrain variablesUsedInProgram:program];
+    STAssertNil(variables, @"no variables");
 }
 
 @end

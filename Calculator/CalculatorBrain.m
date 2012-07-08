@@ -17,12 +17,22 @@
 @synthesize programStack = _programStack;
 
 + (BOOL) isVariable:(NSString *) name {
-    NSOrderedSet *operators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", @"sin", @"cos", @"sqrt", @"Pi", @"CHS", nil];
+    NSOrderedSet *operators;
+    if (!operators)
+        operators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", @"sin", @"cos", @"sqrt", @"Pi", @"CHS", nil];
     
     return [operators indexOfObject:name] == NSNotFound;
 }
 
 + (NSString *)descriptionOfTheProgram:(id)program {
+    return nil;
+}
+
++ (NSSet *)variablesUsedInProgram:(id)program {
+    NSMutableArray *stack;
+    if ([program isKindOfClass: [NSArray class]])
+        stack = [program mutableCopy];
+    
     return nil;
 }
 
@@ -43,15 +53,11 @@
         }
     }
     
-    return [self runProgram:stack];
+    return [self popOperandOffStack:stack];
 }
 
 + (double)runProgram:(id)program {
-    NSMutableArray *stack;
-    if ([program isKindOfClass: [NSArray class]])
-        stack = [program mutableCopy];
-    
-    return [self popOperandOffStack: stack];
+    return [self runProgram:program usingVariableValues:nil];
 }
 
 + (double) popOperandOffStack: (NSMutableArray *) stack {
@@ -114,9 +120,9 @@
         return NO;     
         
     NSRange range = [number rangeOfString:@"."];
-    if (range.length == 1) {
+    if (range.location != NSNotFound) {
         range = [[number substringFromIndex:range.location +1] rangeOfString:@"."]; // No Lenght-Check neccessary, because string null terminated
-        if (range.length == 1)
+        if (range.location != NSNotFound)
             return NO;
     }
         
