@@ -135,4 +135,15 @@ static CalculatorBrain *brain;
     STAssertNil(variables, @"no variables");
 }
 
+- (void) testDescriptionOfTheProgram {
+    NSMutableArray *program = [[NSMutableArray alloc] init];
+    [program addObject:[NSNumber numberWithInt:5]];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:[NSNumber numberWithInt:3]];
+    [program addObject:@"+"];
+    [program addObject:@"*"];
+    NSString *description = [CalculatorBrain descriptionOfTheProgram: [program copy]];
+    STAssertEqualObjects(description, @"3 + 4 * 5", @""); 
+}
+
 @end

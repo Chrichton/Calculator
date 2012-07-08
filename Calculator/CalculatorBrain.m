@@ -30,8 +30,32 @@ static NSOrderedSet *_operators;
     return [self.operators indexOfObject:name] == NSNotFound;
 }
 
++ (id) popStack: (NSMutableArray *) stack {
+    id topOfStack = [stack lastObject];
+    if (topOfStack)
+        [stack removeLastObject];
+    
+    return topOfStack;
+}
+
++ (NSString *) descriptionOfStack:(NSMutableArray *)stack{
+    id topOfStack = [self popStack:stack];
+    
+    if ([[self operators] indexOfObject:topOfStack] == NSNotFound)
+        return [topOfStack stringValue];
+    else {
+        NSString *left = [self descriptionOfStack:stack];
+        NSString *right = [self descriptionOfStack:stack];
+        return [NSString stringWithFormat:@"%@ %@ %@", left, topOfStack, right];
+    }
+}
+
 + (NSString *)descriptionOfTheProgram:(id)program {
-    return nil;
+    NSMutableArray *stack;
+    if ([program isKindOfClass: [NSArray class]])
+        stack = [program mutableCopy];
+
+    return [self descriptionOfStack:stack];    
 }
 
 + (NSSet *)variablesUsedInProgram:(id)program {
