@@ -143,7 +143,7 @@ static CalculatorBrain *brain;
     [program addObject:@"+"];
     [program addObject:@"*"];
     NSString *description = [CalculatorBrain descriptionOfTheProgram: [program copy]];
-    STAssertEqualObjects(description, @"3 + 4 * 5", @""); 
+    STAssertEqualObjects(description, @"(3 + 4) * 5", @""); 
 }
 
 @end

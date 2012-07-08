@@ -26,6 +26,10 @@ static NSOrderedSet *_operators;
     return _operators;
 }
 
++ (BOOL)isOperation:(NSString *)operation {
+    return [self.operators indexOfObject:operation] != NSNotFound;  
+}
+
 + (BOOL) isVariable:(NSString *) name {
     return [self.operators indexOfObject:name] == NSNotFound;
 }
@@ -41,12 +45,13 @@ static NSOrderedSet *_operators;
 + (NSString *) descriptionOfStack:(NSMutableArray *)stack{
     id topOfStack = [self popStack:stack];
     
-    if ([[self operators] indexOfObject:topOfStack] == NSNotFound)
-        return [topOfStack stringValue];
-    else {
+    if ([self isOperation:topOfStack]) {
         NSString *left = [self descriptionOfStack:stack];
         NSString *right = [self descriptionOfStack:stack];
-        return [NSString stringWithFormat:@"%@ %@ %@", left, topOfStack, right];
+        return [NSString stringWithFormat:@"(%@ %@ %@)", left, topOfStack, right];       
+    }
+    else {
+        return [topOfStack stringValue];
     }
 }
 
@@ -55,7 +60,15 @@ static NSOrderedSet *_operators;
     if ([program isKindOfClass: [NSArray class]])
         stack = [program mutableCopy];
 
-    return [self descriptionOfStack:stack];    
+    NSString *result = [self descriptionOfStack:stack];
+    if ([[result substringToIndex:1] isEqualToString:@"("]) {
+        NSRange range;
+        range.location = 1;
+        range.length = [result length] - 2;
+        result = [result substringWithRange:range];
+    }
+        
+    return result;    
 }
 
 + (NSSet *)variablesUsedInProgram:(id)program {
