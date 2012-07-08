@@ -62,6 +62,13 @@ static NSOrderedSet *_noOperandOperators;
     return topOfStack;
 }
 
++ (NSMutableArray *) stackFromProgram: (id) program {
+    NSMutableArray *stack;
+    if ([program isKindOfClass: [NSArray class]])
+        stack = [program mutableCopy];
+    return stack;
+}
+
 + (NSString *) descriptionOfStack:(NSMutableArray *)stack{
     id topOfStack = [self popStack:stack];
     
@@ -82,26 +89,29 @@ static NSOrderedSet *_noOperandOperators;
 }
 
 + (NSString *)descriptionOfTheProgram:(id)program {
-    NSMutableArray *stack;
-    if ([program isKindOfClass: [NSArray class]])
-        stack = [program mutableCopy];
-
-    NSString *result = [self descriptionOfStack:stack];
-    if ([[result substringToIndex:1] isEqualToString:@"("]) {
-        NSRange range;
-        range.location = 1;
-        range.length = [result length] - 2;
-        result = [result substringWithRange:range];
-    }
-        
+    NSMutableArray *stack = [self stackFromProgram:program];
+    NSString *result;
+    
+    while ([stack lastObject]) {
+        NSString *resultPart = [self descriptionOfStack:stack];
+        if ([[resultPart substringToIndex:1] isEqualToString:@"("]) {
+            NSRange range;
+            range.location = 1;
+            range.length = [resultPart length] - 2;
+            resultPart = [resultPart substringWithRange:range];
+            
+            if (!result)
+                result = resultPart;
+            else 
+                result = [result stringByAppendingFormat:@" , %@", resultPart];
+        }
+    }  
+    
     return result;    
 }
 
 + (NSSet *)variablesUsedInProgram:(id)program {
-    NSMutableArray *stack;
-    if ([program isKindOfClass: [NSArray class]])
-        stack = [program mutableCopy];
-    
+    NSMutableArray *stack = [self stackFromProgram:program];
     NSPredicate *predicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind) {
         return [self isVariable:obj]; 
     }];
@@ -111,10 +121,7 @@ static NSOrderedSet *_noOperandOperators;
 }
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
-    NSMutableArray *stack;
-    if ([program isKindOfClass: [NSArray class]])
-        stack = [program mutableCopy];
-
+    NSMutableArray *stack = [self stackFromProgram:program];
     for (int i = 0; i < [stack count]; i++) {
         id element = [stack objectAtIndex:i];
         if ([self isVariable:element]) {
