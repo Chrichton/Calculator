@@ -10,18 +10,24 @@
 
 @interface CalculatorBrain()
 @property (nonatomic, strong) NSMutableArray *programStack;
+    + (NSOrderedSet *) operators;
 @end
 
 
 @implementation CalculatorBrain
 @synthesize programStack = _programStack;
 
+static NSOrderedSet *_operators;
+
++ (NSOrderedSet *) operators {
+    if (!_operators)
+        _operators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", @"sin", @"cos", @"sqrt", @"Pi", @"CHS", nil];
+  
+    return _operators;
+}
+
 + (BOOL) isVariable:(NSString *) name {
-    NSOrderedSet *operators;
-    if (!operators)
-        operators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", @"sin", @"cos", @"sqrt", @"Pi", @"CHS", nil];
-    
-    return [operators indexOfObject:name] == NSNotFound;
+    return [self.operators indexOfObject:name] == NSNotFound;
 }
 
 + (NSString *)descriptionOfTheProgram:(id)program {
@@ -33,7 +39,12 @@
     if ([program isKindOfClass: [NSArray class]])
         stack = [program mutableCopy];
     
-    return nil;
+    NSPredicate *predicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind) {
+        return[obj isKindOfClass:[NSString class]] && [self isVariable:obj]; 
+    }];
+                                
+    [stack filterUsingPredicate:predicate];
+    return [stack count] == 0 ? nil : [[NSSet alloc] initWithArray: stack];
 }
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {

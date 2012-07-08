@@ -121,7 +121,7 @@ static CalculatorBrain *brain;
     [program addObject:@"+"];
     
     NSSet *variables = [CalculatorBrain variablesUsedInProgram:program];
-    STAssertEquals(1, [variables count], @"");
+    STAssertEquals(1U, [variables count], @"");
     STAssertEquals(@"x", [variables anyObject], @"one variable 'x'");
 }
 
