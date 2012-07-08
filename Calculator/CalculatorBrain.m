@@ -18,6 +18,9 @@
 @synthesize programStack = _programStack;
 
 static NSOrderedSet *_operators;
+static NSOrderedSet *_binaryOperators;
+static NSOrderedSet *_unaryOperators;
+static NSOrderedSet *_noOperandOperators;
 
 + (NSOrderedSet *) operators {
     if (!_operators)
@@ -26,12 +29,29 @@ static NSOrderedSet *_operators;
     return _operators;
 }
 
-+ (BOOL)isOperation:(NSString *)operation {
-    return [self.operators indexOfObject:operation] != NSNotFound;  
++ (NSOrderedSet *) binaryOperators {
+    if (!_binaryOperators)
+        _binaryOperators = [[NSOrderedSet alloc] initWithObjects:@"+", @"*", @"-", @"/", nil];
+    
+    return _binaryOperators;
 }
 
-+ (BOOL) isVariable:(NSString *) name {
-    return [self.operators indexOfObject:name] == NSNotFound;
++ (NSOrderedSet *) unaryOperators {
+    if (!_unaryOperators)
+        _unaryOperators = [[NSOrderedSet alloc] initWithObjects:@"sin", @"cos", @"sqrt", @"CHS", nil];
+    
+    return _unaryOperators;
+}
+
++ (NSOrderedSet *) noOperandOperators {
+    if (!_noOperandOperators)
+        _noOperandOperators = [[NSOrderedSet alloc] initWithObjects:@"Pi", nil];
+    
+    return _noOperandOperators;
+}
+
++ (BOOL) isVariable:(id) name {
+    return [name isKindOfClass:[NSString class]] && [self.operators indexOfObject:name] == NSNotFound;
 }
 
 + (id) popStack: (NSMutableArray *) stack {
@@ -45,14 +65,20 @@ static NSOrderedSet *_operators;
 + (NSString *) descriptionOfStack:(NSMutableArray *)stack{
     id topOfStack = [self popStack:stack];
     
-    if ([self isOperation:topOfStack]) {
+    if ([[self binaryOperators] indexOfObject:topOfStack] != NSNotFound) {
         NSString *left = [self descriptionOfStack:stack];
         NSString *right = [self descriptionOfStack:stack];
         return [NSString stringWithFormat:@"(%@ %@ %@)", left, topOfStack, right];       
     }
-    else {
+    else if ([[self unaryOperators] indexOfObject:topOfStack] != NSNotFound) {
+        NSString *right = [self descriptionOfStack:stack];
+        return [NSString stringWithFormat:@"%@(%@)", topOfStack, right];       
+    } else if ([[self noOperandOperators] indexOfObject:topOfStack] != NSNotFound) 
+        return [topOfStack stringValue];     
+    else if ([self isVariable:topOfStack])
         return [topOfStack stringValue];
-    }
+    else // Number
+        return [topOfStack stringValue];
 }
 
 + (NSString *)descriptionOfTheProgram:(id)program {
@@ -77,7 +103,7 @@ static NSOrderedSet *_operators;
         stack = [program mutableCopy];
     
     NSPredicate *predicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind) {
-        return[obj isKindOfClass:[NSString class]] && [self isVariable:obj]; 
+        return [self isVariable:obj]; 
     }];
                                 
     [stack filterUsingPredicate:predicate];
@@ -91,13 +117,11 @@ static NSOrderedSet *_operators;
 
     for (int i = 0; i < [stack count]; i++) {
         id element = [stack objectAtIndex:i];
-        if ([element isKindOfClass:[NSString class]]) {
-            if ([self isVariable:element]) {
-                NSNumber *value = [variableValues objectForKey: element];
-                if (!value)
-                    value = [NSNumber numberWithInt:0];
-                [stack replaceObjectAtIndex:i withObject:value];
-            }
+        if ([self isVariable:element]) {
+            NSNumber *value = [variableValues objectForKey: element];
+            if (!value)
+                value = [NSNumber numberWithInt:0];
+            [stack replaceObjectAtIndex:i withObject:value];
         }
     }
     
@@ -110,10 +134,7 @@ static NSOrderedSet *_operators;
 
 + (double) popOperandOffStack: (NSMutableArray *) stack {
     double result = 0;
-    
-    id topOfStack = [stack lastObject];
-    if (topOfStack) 
-        [stack removeLastObject];
+    id topOfStack = [self popStack:stack];
     
     if ([topOfStack isKindOfClass:[NSNumber class]])
         result = [topOfStack doubleValue];
