@@ -148,8 +148,12 @@ static CalculatorBrain *brain;
     [program addObject:@"x"];
     [program addObject:@"*"];
     
+    [program addObject:[NSNumber numberWithInt:5]];
+    [program addObject:[NSNumber numberWithInt:4]];
+    [program addObject:@"+"];
+    
     NSString *description = [CalculatorBrain descriptionOfTheProgram: [program copy]];
-    STAssertEqualObjects(description, @"x * sin((Pi + ((3 + 4) * 5)))", @""); 
+    STAssertEqualObjects(description, @"4 + 5 , x * sin((Pi + ((3 + 4) * 5)))", @""); 
 }
 
 @end
