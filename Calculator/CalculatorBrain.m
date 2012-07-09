@@ -81,9 +81,9 @@ static NSOrderedSet *_noOperandOperators;
         NSString *right = [self descriptionOfStack:stack];
         return [NSString stringWithFormat:@"%@(%@)", topOfStack, right];       
     } else if ([[self noOperandOperators] indexOfObject:topOfStack] != NSNotFound) 
-        return [topOfStack stringValue];     
+        return topOfStack;     
     else if ([self isVariable:topOfStack])
-        return [topOfStack stringValue];
+        return topOfStack;
     else // Number
         return [topOfStack stringValue];
 }
@@ -99,12 +99,12 @@ static NSOrderedSet *_noOperandOperators;
             range.location = 1;
             range.length = [resultPart length] - 2;
             resultPart = [resultPart substringWithRange:range];
-            
-            if (!result)
-                result = resultPart;
-            else 
-                result = [result stringByAppendingFormat:@" , %@", resultPart];
-        }
+        }   
+        
+        if (!result)
+            result = resultPart;
+        else 
+            result = [result stringByAppendingFormat:@" , %@", resultPart];
     }  
     
     return result;    
