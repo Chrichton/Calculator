@@ -11,9 +11,10 @@
 @interface CalculatorBrain : NSObject
 
 - (void) pushOperand:(double)operand;
-- (double) performOperation:(NSString *)operation;
+- (void) pushOperationOrVariable:(NSString *)operation; 
 - (BOOL) isValidNumber:(NSString *)number;
 - (void) clear;
+- (void) removeLastEntry;
 
 @property (readonly) id program;
 

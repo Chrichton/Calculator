@@ -12,7 +12,7 @@
 @interface CalculatorViewController ()
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
-@property (nonatomic) NSMutableDictionary *testVariableValues;
+@property (nonatomic) NSDictionary *testVariableValues;
 
 @end
 
@@ -27,6 +27,13 @@
         _brain = [[CalculatorBrain alloc] init];
     
     return _brain;
+}
+
+- (void) runProgram {
+    double result = [CalculatorBrain runProgram:[self.brain program] usingVariableValues:self.testVariableValues];
+    NSString *resultString = [NSString stringWithFormat:@"%g", result];
+    self.display.text = resultString;
+    self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];    
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -44,16 +51,12 @@
     }
 }
 
-- (IBAction)operationPressed:(UIButton *)sender {
+- (IBAction)operationOrVariablePressed:(UIButton *)sender {
     if (self.userIsInTheMiddleOfEnteringANumber)
         [self enterPressed];
     
-    [self.brain performOperation:sender.currentTitle]; // TODO nur push ohne Berechnung
-
-    double result = [CalculatorBrain runProgram:[self.brain program] usingVariableValues:self.testVariableValues];
-    NSString *resultString = [NSString stringWithFormat:@"%g", result];
-    self.display.text = resultString;
-    self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
+    [self.brain pushOperationOrVariable:sender.currentTitle]; 
+    [self runProgram];
 }
 
 - (IBAction)enterPressed {
@@ -69,13 +72,6 @@
     self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
 }
 
-- (IBAction)backspacePressed:(id)sender {
-    if (self.display.text.length < 2) 
-        [self clearPressed:sender];
-    else 
-        self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
-}
-
 - (IBAction)changeSignPressed:(UIButton *)sender {
     if (self.userIsInTheMiddleOfEnteringANumber) {
         if ([[self.display.text substringToIndex:1] isEqualToString:@"-"]) 
@@ -85,33 +81,34 @@
         
         self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
     } else
-        [self operationPressed:sender];
+        [self operationOrVariablePressed:sender];
 }
 
 - (IBAction)undoPressed:(id)sender {
-}
-
-- (IBAction)variablePressed:(UIButton *)sender {
+    if (self.display.text.length < 2) {
+        self.userIsInTheMiddleOfEnteringANumber = NO;
+        [self.brain removeLastEntry];
+        [self runProgram];
+    }
+    else 
+        self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
 }
 
 - (IBAction)testPressed:(id)sender {
-    _testVariableValues = nil;
-    
-    [self.testVariableValues setValue:[NSNumber numberWithInt:5] forKey:@"x"];
-    [self.testVariableValues setValue:[NSNumber numberWithInt:4] forKey:@"y"];
+    self.testVariableValues = [NSDictionary dictionaryWithObjectsAndKeys: 
+                           [NSNumber numberWithInt:arc4random() % 9], @"x",
+                           [NSNumber numberWithInt:arc4random() % 9], @"y",
+                           [NSNumber numberWithInt:arc4random() % 9], @"foo", nil];
     
     NSString *variablesString = @"";
-    for (NSString *variable in [self.testVariableValues allKeys]) 
+    for (NSString *variable in self.testVariableValues) 
         variablesString = [variablesString stringByAppendingFormat:@"%@ = %g ", variable, [[self.testVariableValues objectForKey:variable] doubleValue]];
     
     self.variables.text = variablesString;
 }
-
-- (NSMutableDictionary *)testVariableValues {
-    if (!_testVariableValues) 
-        _testVariableValues = [[NSMutableDictionary alloc] init];
-    
-    return _testVariableValues;
+- (IBAction)testNilPressed:(id)sender {
+    self.testVariableValues = nil;
+    self.variables.text = @"";
 }
 
 - (void)viewDidUnload {

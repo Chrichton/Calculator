@@ -170,6 +170,11 @@ static NSOrderedSet *_noOperandOperators;
     return result;
 }
 
+- (void) removeLastEntry {
+    [CalculatorBrain popStack: self.programStack]; 
+}
+
+
 - (void) clear {
     _programStack = nil;
 }
@@ -178,10 +183,8 @@ static NSOrderedSet *_noOperandOperators;
     [self.programStack addObject: [NSNumber numberWithDouble:operand]];
 }
 
-- (double) performOperation:(NSString *)operation {
+- (void) pushOperationOrVariable:(NSString *)operation {
     [self.programStack addObject:operation];
-    
-    return [CalculatorBrain runProgram:self.program];
 }
 
 - (BOOL) isValidNumber:(NSString *)number
