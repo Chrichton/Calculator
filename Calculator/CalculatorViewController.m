@@ -17,6 +17,7 @@
 
 @implementation CalculatorViewController
 @synthesize history = _history;
+@synthesize variables = _variables;
 @synthesize display = _display, brain = _brain, userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 
 
@@ -84,8 +85,18 @@
         [self operationPressed:sender];
 }
 
+- (IBAction)undoPressed:(id)sender {
+}
+
+- (IBAction)variablePressed:(UIButton *)sender {
+}
+
+- (IBAction)testPressed:(id)sender {
+}
+
 - (void)viewDidUnload {
     [self setHistory:nil];
+    [self setVariables:nil];
     [super viewDidUnload];
 }
 @end
