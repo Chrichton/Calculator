@@ -48,7 +48,9 @@
     if (self.userIsInTheMiddleOfEnteringANumber)
         [self enterPressed];
     
-    double result =[self.brain performOperation:sender.currentTitle];
+    [self.brain performOperation:sender.currentTitle]; // TODO nur push ohne Berechnung
+
+    double result = [CalculatorBrain runProgram:[self.brain program] usingVariableValues:self.testVariableValues];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
     self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
