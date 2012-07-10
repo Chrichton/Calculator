@@ -33,12 +33,12 @@
         NSString *newNumber = [self.display.text stringByAppendingString:digit];
         if ([self.brain isValidNumber:newNumber]) {  
             self.display.text = newNumber; 
-            self.history.text = [self.history.text stringByAppendingString:digit];
+            self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
         }
     } else {
         self.display.text = digit;
         self.userIsInTheMiddleOfEnteringANumber = YES;
-        self.history.text = [self.history.text stringByAppendingString:digit];
+        self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
     }
 }
 
@@ -49,20 +49,20 @@
     double result =[self.brain performOperation:sender.currentTitle];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
-    self.history.text = [self.history.text stringByAppendingFormat:@"%@ = %@ ", sender.currentTitle, resultString];
+    self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
 }
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]]; 
     self.userIsInTheMiddleOfEnteringANumber = NO;
-    self.history.text = [self.history.text stringByAppendingString:@" "];
+    self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
 }
 
 - (IBAction)clearPressed:(id)sender {
     [self.brain clear]; 
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
-    self.history.text = @"";
+    self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
 }
 
 - (IBAction)backspacePressed:(id)sender {
@@ -79,7 +79,7 @@
         else
             self.display.text = [@"-" stringByAppendingString:self.display.text];
         
-        self.history.text = [self.history.text stringByAppendingString:@" CHS "];
+        self.history.text = [CalculatorBrain descriptionOfTheProgram:[self.brain program]];
     } else
         [self operationPressed:sender];
 }
