@@ -12,7 +12,7 @@
 @interface CalculatorViewController ()
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
-@property (nonatomic) NSDictionary *testVariableValues;
+@property (nonatomic) NSMutableDictionary *testVariableValues;
 
 @end
 
@@ -95,11 +95,21 @@
 }
 
 - (IBAction)testPressed:(id)sender {
+    _testVariableValues = nil;
+    
+    [self.testVariableValues setValue:[NSNumber numberWithInt:5] forKey:@"x"];
+    [self.testVariableValues setValue:[NSNumber numberWithInt:4] forKey:@"y"];
+    
+    NSString *variablesString = @"";
+    for (NSString *variable in [self.testVariableValues allKeys]) 
+        variablesString = [variablesString stringByAppendingFormat:@"%@ = %g ", variable, [[self.testVariableValues objectForKey:variable] doubleValue]];
+    
+    self.variables.text = variablesString;
 }
 
-- (NSDictionary *)testVariableValues {
+- (NSMutableDictionary *)testVariableValues {
     if (!_testVariableValues) 
-        _testVariableValues = [[NSDictionary alloc] init];
+        _testVariableValues = [[NSMutableDictionary alloc] init];
     
     return _testVariableValues;
 }
