@@ -12,14 +12,15 @@
 @interface CalculatorViewController ()
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
+@property (nonatomic) NSDictionary *testVariableValues;
 
 @end
 
 @implementation CalculatorViewController
 @synthesize history = _history;
 @synthesize variables = _variables;
-@synthesize display = _display, brain = _brain, userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
-
+@synthesize display = _display, brain = _brain, userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber, 
+    testVariableValues = _testVariableValues;
 
 - (CalculatorBrain *)brain {
     if (!_brain)
@@ -92,6 +93,13 @@
 }
 
 - (IBAction)testPressed:(id)sender {
+}
+
+- (NSDictionary *)testVariableValues {
+    if (!_testVariableValues) 
+        _testVariableValues = [[NSDictionary alloc] init];
+    
+    return _testVariableValues;
 }
 
 - (void)viewDidUnload {
