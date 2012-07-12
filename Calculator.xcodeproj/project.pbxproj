@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF06618515AF3AA300978BB4 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06618415AF3AA300978BB4 /* AxesDrawer.m */; };
 		FF06618815AF3AD300978BB4 /* GraphicsXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06618715AF3AD300978BB4 /* GraphicsXYView.m */; };
+		FF06618B15AF43AB00978BB4 /* GraphicsXYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06618A15AF43AB00978BB4 /* GraphicsXYViewController.m */; };
 		FF15BBA3159B647E0041AD68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA2159B647E0041AD68 /* UIKit.framework */; };
 		FF15BBA5159B647E0041AD68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA4159B647E0041AD68 /* Foundation.framework */; };
 		FF15BBA7159B647E0041AD68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA6159B647E0041AD68 /* CoreGraphics.framework */; };
@@ -40,6 +41,8 @@
 		FF06618415AF3AA300978BB4 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
 		FF06618615AF3AD300978BB4 /* GraphicsXYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsXYView.h; sourceTree = "<group>"; };
 		FF06618715AF3AD300978BB4 /* GraphicsXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsXYView.m; sourceTree = "<group>"; };
+		FF06618915AF43AB00978BB4 /* GraphicsXYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsXYViewController.h; sourceTree = "<group>"; };
+		FF06618A15AF43AB00978BB4 /* GraphicsXYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsXYViewController.m; sourceTree = "<group>"; };
 		FF15BB9E159B647E0041AD68 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF15BBA2159B647E0041AD68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FF15BBA4159B647E0041AD68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,8 @@
 				FF06618415AF3AA300978BB4 /* AxesDrawer.m */,
 				FF06618615AF3AD300978BB4 /* GraphicsXYView.h */,
 				FF06618715AF3AD300978BB4 /* GraphicsXYView.m */,
+				FF06618915AF43AB00978BB4 /* GraphicsXYViewController.h */,
+				FF06618A15AF43AB00978BB4 /* GraphicsXYViewController.m */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				FF15BBD9159B6E610041AD68 /* CalculatorBrain.m in Sources */,
 				FF06618515AF3AA300978BB4 /* AxesDrawer.m in Sources */,
 				FF06618815AF3AD300978BB4 /* GraphicsXYView.m in Sources */,
+				FF06618B15AF43AB00978BB4 /* GraphicsXYViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
