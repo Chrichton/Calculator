@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF06618515AF3AA300978BB4 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06618415AF3AA300978BB4 /* AxesDrawer.m */; };
+		FF06618815AF3AD300978BB4 /* GraphicsXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06618715AF3AD300978BB4 /* GraphicsXYView.m */; };
 		FF15BBA3159B647E0041AD68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA2159B647E0041AD68 /* UIKit.framework */; };
 		FF15BBA5159B647E0041AD68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA4159B647E0041AD68 /* Foundation.framework */; };
 		FF15BBA7159B647E0041AD68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15BBA6159B647E0041AD68 /* CoreGraphics.framework */; };
@@ -34,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF06618315AF3AA300978BB4 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		FF06618415AF3AA300978BB4 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
+		FF06618615AF3AD300978BB4 /* GraphicsXYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsXYView.h; sourceTree = "<group>"; };
+		FF06618715AF3AD300978BB4 /* GraphicsXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsXYView.m; sourceTree = "<group>"; };
 		FF15BB9E159B647E0041AD68 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF15BBA2159B647E0041AD68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FF15BBA4159B647E0041AD68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +87,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF06618115AF3A7600978BB4 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				FF06618315AF3AA300978BB4 /* AxesDrawer.h */,
+				FF06618415AF3AA300978BB4 /* AxesDrawer.m */,
+				FF06618615AF3AD300978BB4 /* GraphicsXYView.h */,
+				FF06618715AF3AD300978BB4 /* GraphicsXYView.m */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
 		FF15BB93159B647E0041AD68 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +131,7 @@
 		FF15BBA8159B647E0041AD68 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				FF06618115AF3A7600978BB4 /* Graphics */,
 				FF15BBB1159B647E0041AD68 /* CalculatorAppDelegate.h */,
 				FF15BBB2159B647E0041AD68 /* CalculatorAppDelegate.m */,
 				FF15BBB4159B647E0041AD68 /* MainStoryboard.storyboard */,
@@ -268,6 +286,8 @@
 				FF15BBB3159B647E0041AD68 /* CalculatorAppDelegate.m in Sources */,
 				FF15BBB9159B647E0041AD68 /* CalculatorViewController.m in Sources */,
 				FF15BBD9159B6E610041AD68 /* CalculatorBrain.m in Sources */,
+				FF06618515AF3AA300978BB4 /* AxesDrawer.m in Sources */,
+				FF06618815AF3AD300978BB4 /* GraphicsXYView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +457,7 @@
 				FF15BBD3159B647F0041AD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FF15BBD4159B647F0041AD68 /* Build configuration list for PBXNativeTarget "CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +466,7 @@
 				FF15BBD6159B647F0041AD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

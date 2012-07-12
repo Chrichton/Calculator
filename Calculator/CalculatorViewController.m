@@ -18,7 +18,6 @@
 
 @implementation CalculatorViewController
 @synthesize history = _history;
-@synthesize variables = _variables;
 @synthesize display = _display, brain = _brain, userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber, 
     testVariableValues = _testVariableValues;
 
@@ -94,26 +93,9 @@
         self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
 }
 
-- (IBAction)testPressed:(id)sender {
-    self.testVariableValues = [NSDictionary dictionaryWithObjectsAndKeys: 
-                           [NSNumber numberWithInt:arc4random() % 9], @"x",
-                           [NSNumber numberWithInt:arc4random() % 9], @"y",
-                           [NSNumber numberWithInt:arc4random() % 9], @"foo", nil];
-    
-    NSString *variablesString = @"";
-    for (NSString *variable in self.testVariableValues) 
-        variablesString = [variablesString stringByAppendingFormat:@"%@ = %g ", variable, [[self.testVariableValues objectForKey:variable] doubleValue]];
-    
-    self.variables.text = variablesString;
-}
-- (IBAction)testNilPressed:(id)sender {
-    self.testVariableValues = nil;
-    self.variables.text = @"";
-}
-
 - (void)viewDidUnload {
     [self setHistory:nil];
-    [self setVariables:nil];
     [super viewDidUnload];
 }
+
 @end
