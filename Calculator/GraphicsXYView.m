@@ -10,6 +10,8 @@
 #import "AxesDrawer.h"
 
 @implementation GraphicsXYView
+@synthesize scalefactor = _scalefactor, origin = _origin, datasource = _datasource;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -22,7 +24,17 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [AxesDrawer drawAxesInRect:rect originAtPoint:CGPointZero scale:1];
+    [AxesDrawer drawAxesInRect:rect originAtPoint:CGPointZero scale:self.scalefactor];
+    
+    // forach x-Point on screen ; convert to coordinate -> double y value = [self.datasource getValueForX: x];
+    // draw
+}
+
+-(double) scalefactor {
+    if (_scalefactor == 0)
+        _scalefactor = 1;
+
+    return _scalefactor;
 }
 
 @end

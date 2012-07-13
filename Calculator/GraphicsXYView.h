@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class GraphicsXYView;
+
+@protocol GraphicsDatasource <NSObject>
+
+-(double) getValueForX: (double) xValue;
+
+@end
+
 @interface GraphicsXYView : UIView
+
+@property (nonatomic, weak) id<GraphicsDatasource> datasource;
+@property (nonatomic) double scalefactor;
+@property (nonatomic) CGPoint origin;
 
 @end
