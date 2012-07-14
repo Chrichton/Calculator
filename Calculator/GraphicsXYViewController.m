@@ -7,12 +7,14 @@
 //
 
 #import "GraphicsXYViewController.h"
+#import "GraphicsXYView.h"
 
 @interface GraphicsXYViewController ()
 @property (nonatomic) NSDictionary *data;
 @end
 
 @implementation GraphicsXYViewController
+@synthesize graphicsView = _graphicsView;
 @synthesize data = _data;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,11 +29,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.graphicsView.origin = CGPointMake(100, 190);
 }
 
 - (void)viewDidUnload
 {
+    [self setGraphicsView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

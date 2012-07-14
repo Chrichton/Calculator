@@ -24,7 +24,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [AxesDrawer drawAxesInRect:rect originAtPoint:CGPointZero scale:self.scalefactor];
+    [AxesDrawer drawAxesInRect:rect originAtPoint:self.origin scale:self.scalefactor];
     
     // forach x-Point on screen ; convert to coordinate -> double y value = [self.datasource getValueForX: x];
     // draw

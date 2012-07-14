@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "GraphicsXYViewController.h"
 
 @interface CalculatorViewController ()
 @property (nonatomic, strong) CalculatorBrain *brain;
@@ -91,6 +92,13 @@
     }
     else 
         self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"graphics"]) {
+        GraphicsXYViewController *controller = [segue destinationViewController];
+        
+    }
 }
 
 - (void)viewDidUnload {
