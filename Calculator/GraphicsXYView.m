@@ -37,10 +37,12 @@ static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
         double x = (i - self.origin.x) / self.scalefactor;
         double y = -[self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
         
-        if (i == 0) 
-            CGContextMoveToPoint(context, i, y);
-        else    
-            CGContextAddLineToPoint(context, i, y);
+        if(!isinf(y) && !isnan(y)) {
+            if (i == 0) 
+                CGContextMoveToPoint(context, i, y);
+            else    
+                CGContextAddLineToPoint(context, i, y);
+        }
     }
                              
     CGContextStrokePath(context);
