@@ -27,7 +27,6 @@
 {
     [super viewDidLoad];
     self.title = [CalculatorBrain descriptionOfTheProgram:self.program];
-    self.graphicsView.origin = CGPointMake(150, 200);
     self.graphicsView.datasource = self;
 
     [self.graphicsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(pinch:)]];

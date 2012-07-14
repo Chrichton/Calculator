@@ -11,10 +11,10 @@
 
 @implementation GraphicsXYView 
 
-static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
-
 @synthesize scalefactor = _scalefactor, origin = _origin, datasource = _datasource;
 
+static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
+static NSString *originKey = @"GraphicsXYView.OriginKey";
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -64,11 +64,18 @@ static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
 }
 
 - (CGPoint) origin {
-    
+    NSString *originString = [[NSUserDefaults standardUserDefaults] stringForKey:originKey];
+    if (originString)
+        _origin = CGPointFromString(originString);
+    else 
+        _origin = CGPointMake(150, 200);
+                              
     return _origin;
 }
 
-- (void) setOrigin:(CGPoint)origin {
+- (void) setOrigin:(CGPoint)origin {    
+    [[NSUserDefaults standardUserDefaults] setObject:NSStringFromCGPoint(origin) forKey:originKey];
+    
     _origin = origin;
     [self setNeedsDisplay];
 }
