@@ -46,11 +46,24 @@
     CGContextStrokePath(context);
 }
 
--(double) scalefactor {
+- (double) scalefactor {
     if (_scalefactor == 0)
         _scalefactor = 1;
 
+    [self setNeedsDisplay];
     return _scalefactor;
+}
+
+- (CGPoint) origin {
+
+    [self setNeedsDisplay];
+    return _origin;
+}
+
+- (id<GraphicsDatasource>) datasource {
+    
+    [self setNeedsDisplay];
+    return _datasource;
 }
 
 @end
