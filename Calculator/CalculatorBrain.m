@@ -73,8 +73,8 @@ static NSOrderedSet *_noOperandOperators;
     id topOfStack = [self popStack:stack];
     
     if ([[self binaryOperators] indexOfObject:topOfStack] != NSNotFound) {
-        NSString *left = [self descriptionOfStack:stack];
         NSString *right = [self descriptionOfStack:stack];
+        NSString *left = [self descriptionOfStack:stack];
         return [NSString stringWithFormat:@"(%@ %@ %@)", left, topOfStack, right];       
     }
     else if ([[self unaryOperators] indexOfObject:topOfStack] != NSNotFound) {
