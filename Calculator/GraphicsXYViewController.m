@@ -27,7 +27,6 @@
 {
     [super viewDidLoad];
     self.title = [CalculatorBrain descriptionOfTheProgram:self.program];
-    self.graphicsView.scalefactor = 35;
     self.graphicsView.origin = CGPointMake(150, 200);
     self.graphicsView.datasource = self;
 

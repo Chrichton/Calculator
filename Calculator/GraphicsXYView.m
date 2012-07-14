@@ -9,7 +9,10 @@
 #import "GraphicsXYView.h"
 #import "AxesDrawer.h"
 
-@implementation GraphicsXYView
+@implementation GraphicsXYView 
+
+static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
+
 @synthesize scalefactor = _scalefactor, origin = _origin, datasource = _datasource;
 
 
@@ -44,6 +47,7 @@
 }
 
 - (double) scalefactor {
+    _scalefactor = [[NSUserDefaults standardUserDefaults] doubleForKey:scalefactorKey];
     if (_scalefactor == 0)
         _scalefactor = 1;
 
@@ -51,8 +55,15 @@
 }
 
 - (void) setScalefactor:(double)scalefactor {
+    [[NSUserDefaults standardUserDefaults] setDouble:scalefactor forKey:scalefactorKey];
+
     _scalefactor = scalefactor;
     [self setNeedsDisplay];
+}
+
+- (CGPoint) origin {
+    
+    return _origin;
 }
 
 - (void) setOrigin:(CGPoint)origin {
