@@ -30,6 +30,7 @@
 {
     [super viewDidLoad];
     self.graphicsView.origin = CGPointMake(100, 190);
+    self.graphicsView.datasource = self;
 }
 
 - (void)viewDidUnload
@@ -42,6 +43,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (double) getValueForX:(double)xValue {
+    return xValue;
 }
 
 @end
