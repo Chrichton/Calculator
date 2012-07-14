@@ -75,4 +75,16 @@
     }
 }
 
+- (void) pan:(UIPanGestureRecognizer *)gesture {
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint translation = [gesture translationInView:self];
+        CGPoint origin = self.origin;
+        origin.x -= translation.x;
+        origin.y -= translation.y;
+        self.origin = origin;
+        [gesture setTranslation:CGPointZero inView:self];
+    }
+}
+
 @end
