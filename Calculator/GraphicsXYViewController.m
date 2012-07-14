@@ -35,6 +35,9 @@
 
     [self.graphicsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(pinch:)]];
     [self.graphicsView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(pan:)]];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(tripleTap:)];
+    tapRecognizer.numberOfTapsRequired = 3;
 }
 
 - (void)viewDidUnload
@@ -51,6 +54,15 @@
 
 - (double) getValueForX:(double)xValue {
     return xValue;
+}
+
+- (void) tripleTap:(UITapGestureRecognizer *)gesture {
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint tappedPoint = [gesture locationInView:self.graphicsView];
+        
+        self.graphicsView.origin = tappedPoint;
+    }
 }
 
 @end
