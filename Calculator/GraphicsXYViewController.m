@@ -30,7 +30,8 @@
 {
     [super viewDidLoad];
     self.title = @"Formel";
-    self.graphicsView.origin = CGPointMake(100, 190);
+    self.graphicsView.scalefactor = 35;
+    self.graphicsView.origin = CGPointMake(150, 200);
     self.graphicsView.datasource = self;
 
     [self.graphicsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(pinch:)]];
@@ -54,7 +55,7 @@
 }
 
 - (double) getValueForX:(double)xValue {
-    return xValue;
+    return sin(xValue);
 }
 
 - (void) tripleTap:(UITapGestureRecognizer *)gesture {

@@ -24,6 +24,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    NSLog(@"sacale: %g", self.scalefactor);
+    
     [AxesDrawer drawAxesInRect:rect originAtPoint:self.origin scale:self.scalefactor];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -32,15 +34,13 @@
     
 
     for (int i = 0; i < rect.size.width; i++) {
-        double y = [self.datasource getValueForX:i];
+        double x = (i - self.origin.x) / self.scalefactor;
+        double y = [self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
       
         if (i == 0) 
             CGContextMoveToPoint(context, i, y);
         else    
             CGContextAddLineToPoint(context, i, y);
-            
-    // forach x-Point on screen ; convert to coordinate -> double y value = [self.datasource getValueForX: x];
-    // draw
     }
                              
     CGContextStrokePath(context);
