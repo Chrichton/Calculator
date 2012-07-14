@@ -50,20 +50,22 @@
     if (_scalefactor == 0)
         _scalefactor = 1;
 
-    [self setNeedsDisplay];
     return _scalefactor;
 }
 
-- (CGPoint) origin {
-
+- (void) setScalefactor:(double)scalefactor {
+    _scalefactor = scalefactor;
     [self setNeedsDisplay];
-    return _origin;
 }
 
-- (id<GraphicsDatasource>) datasource {
-    
+- (void) setOrigin:(CGPoint)origin {
+    _origin = origin;
     [self setNeedsDisplay];
-    return _datasource;
+}
+
+- (void) setDatasource:(id<GraphicsDatasource>)datasource {    
+    _datasource = datasource;
+    [self setNeedsDisplay];
 }
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture
