@@ -151,10 +151,14 @@ static NSOrderedSet *_noOperandOperators;
             result = [self popOperandOffStack: stack] + [self popOperandOffStack: stack];
         else if ([operation isEqualToString:@"*"])
             result = [self popOperandOffStack: stack] * [self popOperandOffStack: stack];  
-        else if ([operation isEqualToString:@"-"])
-            result = [self popOperandOffStack: stack] - [self popOperandOffStack: stack];  
-        else if ([operation isEqualToString:@"/"])
-            result = [self popOperandOffStack: stack] / [self popOperandOffStack: stack];  
+        else if ([operation isEqualToString:@"-"]) {
+            double rhs = [self popOperandOffStack: stack];
+            result = [self popOperandOffStack: stack] - rhs;  
+        }
+        else if ([operation isEqualToString:@"/"]) {
+            double rhs = [self popOperandOffStack: stack];
+            result = [self popOperandOffStack: stack] / rhs;  
+        }
         else if ([operation isEqualToString:@"sin"])
             result = sin([self popOperandOffStack: stack]);
         else  if ([operation isEqualToString:@"cos"])
