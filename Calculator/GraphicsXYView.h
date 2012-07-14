@@ -22,4 +22,6 @@
 @property (nonatomic) double scalefactor;
 @property (nonatomic) CGPoint origin;
 
+- (void)pinch:(UIPinchGestureRecognizer *)gesture;
+
 @end

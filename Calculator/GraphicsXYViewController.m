@@ -32,6 +32,8 @@
     self.title = @"Formel";
     self.graphicsView.origin = CGPointMake(100, 190);
     self.graphicsView.datasource = self;
+
+    [self.graphicsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphicsView action:@selector(pinch:)]];
 }
 
 - (void)viewDidUnload
