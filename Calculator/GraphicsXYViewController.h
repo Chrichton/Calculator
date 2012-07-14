@@ -12,5 +12,6 @@
 @interface GraphicsXYViewController : UIViewController<GraphicsDatasource>
 
 @property (weak, nonatomic) IBOutlet GraphicsXYView *graphicsView;
+@property (nonatomic) id program;
 
 @end

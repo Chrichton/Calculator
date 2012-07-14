@@ -97,7 +97,7 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"graphics"]) {
         GraphicsXYViewController *controller = [segue destinationViewController];
-        
+        controller.program = self.brain.program;
     }
 }
 

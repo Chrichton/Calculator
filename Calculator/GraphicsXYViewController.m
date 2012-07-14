@@ -8,14 +8,11 @@
 
 #import "GraphicsXYViewController.h"
 #import "GraphicsXYView.h"
-
-@interface GraphicsXYViewController ()
-@property (nonatomic) NSDictionary *data;
-@end
+#import "CalculatorBrain.h"
 
 @implementation GraphicsXYViewController
-@synthesize graphicsView = _graphicsView;
-@synthesize data = _data;
+
+@synthesize graphicsView = _graphicsView, program = _program;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Formel";
+    self.title = [CalculatorBrain descriptionOfTheProgram:self.program];
     self.graphicsView.scalefactor = 35;
     self.graphicsView.origin = CGPointMake(150, 200);
     self.graphicsView.datasource = self;
@@ -54,10 +51,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (double) getValueForX:(double)xValue {
-    return sin(xValue);
-}
-
 - (void) tripleTap:(UITapGestureRecognizer *)gesture {
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
         (gesture.state == UIGestureRecognizerStateEnded)) {
@@ -65,6 +58,11 @@
         
         self.graphicsView.origin = tappedPoint;
     }
+}
+
+- (double) getValueForX:(double)xValue {
+    NSDictionary *variableValues = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:xValue], @"x", nil];
+    return [CalculatorBrain runProgram:self.program usingVariableValues:variableValues];
 }
 
 @end

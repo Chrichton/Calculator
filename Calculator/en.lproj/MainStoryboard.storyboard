@@ -419,7 +419,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="6t6-OC-WEp" kind="push" id="4EA-t8-iXq"/>
+                                    <segue destination="6t6-OC-WEp" kind="push" identifier="graphics" id="4EA-t8-iXq"/>
                                 </connections>
                             </button>
                         </subviews>

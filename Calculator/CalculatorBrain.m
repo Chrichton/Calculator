@@ -142,7 +142,7 @@ static NSOrderedSet *_noOperandOperators;
 + (double) popOperandOffStack: (NSMutableArray *) stack {
     double result = 0;
     id topOfStack = [self popStack:stack];
-    
+
     if ([topOfStack isKindOfClass:[NSNumber class]])
         result = [topOfStack doubleValue];
     else if ([topOfStack isKindOfClass:[NSString class]]) {
@@ -156,17 +156,17 @@ static NSOrderedSet *_noOperandOperators;
         else if ([operation isEqualToString:@"/"])
             result = [self popOperandOffStack: stack] / [self popOperandOffStack: stack];  
         else if ([operation isEqualToString:@"sin"])
-            result = sin(result);
+            result = sin([self popOperandOffStack: stack]);
         else  if ([operation isEqualToString:@"cos"])
-            result = cos(result);
+            result = cos([self popOperandOffStack: stack]);
         else  if ([operation isEqualToString:@"sqrt"])
-            result = sqrt(result);
+            result = sqrt([self popOperandOffStack: stack]);
         else  if ([operation isEqualToString:@"Pi"]) 
             result = M_PI;
         else  if ([operation isEqualToString:@"CHS"]) 
             result = [self popOperandOffStack: stack] * (-1);
     }
-        
+    
     return result;
 }
 

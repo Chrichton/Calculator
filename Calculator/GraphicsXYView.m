@@ -24,19 +24,16 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSLog(@"sacale: %g", self.scalefactor);
-    
     [AxesDrawer drawAxesInRect:rect originAtPoint:self.origin scale:self.scalefactor];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [[UIColor blueColor] CGColor]);
     CGContextBeginPath(context);
     
-
     for (int i = 0; i < rect.size.width; i++) {
         double x = (i - self.origin.x) / self.scalefactor;
-        double y = [self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
-      
+        double y = -[self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
+        
         if (i == 0) 
             CGContextMoveToPoint(context, i, y);
         else    
