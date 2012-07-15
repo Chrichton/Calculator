@@ -33,15 +33,15 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
     CGContextSetStrokeColorWithColor(context, [[UIColor blueColor] CGColor]);
     CGContextBeginPath(context);
     
-    for (int i = 0; i < rect.size.width; i++) {
-        double x = (i - self.origin.x) / self.scalefactor;
+    for (int i = 0; i < rect.size.width * self.contentScaleFactor; i++) {
+        double x = (i / self.contentScaleFactor - self.origin.x) / self.scalefactor;
         double y = -[self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
         
         if(!isinf(y) && !isnan(y)) {
             if (i == 0) 
-                CGContextMoveToPoint(context, i, y);
+                CGContextMoveToPoint(context, i / self.contentScaleFactor, y);
             else    
-                CGContextAddLineToPoint(context, i, y);
+                CGContextAddLineToPoint(context, i / self.contentScaleFactor, y);
         }
     }
                              
@@ -99,8 +99,8 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
         (gesture.state == UIGestureRecognizerStateEnded)) {
         CGPoint translation = [gesture translationInView:self];
         CGPoint origin = self.origin;
-        origin.x -= translation.x;
-        origin.y -= translation.y;
+        origin.x += translation.x;
+        origin.y += translation.y;
         self.origin = origin;
         [gesture setTranslation:CGPointZero inView:self];
     }
