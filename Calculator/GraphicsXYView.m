@@ -34,14 +34,15 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
     CGContextBeginPath(context);
     
     for (int i = 0; i < rect.size.width * self.contentScaleFactor; i++) {
-        double x = (i / self.contentScaleFactor - self.origin.x) / self.scalefactor;
+        CGFloat pixel = i / self.contentScaleFactor;
+        double x = ( pixel - self.origin.x) / self.scalefactor;
         double y = -[self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
         
         if(!isinf(y) && !isnan(y)) {
             if (i == 0) 
-                CGContextMoveToPoint(context, i / self.contentScaleFactor, y);
+                CGContextMoveToPoint(context, pixel, y);
             else    
-                CGContextAddLineToPoint(context, i / self.contentScaleFactor, y);
+                CGContextAddLineToPoint(context, pixel, y);
         }
     }
                              
