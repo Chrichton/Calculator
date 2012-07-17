@@ -22,7 +22,7 @@
 @property (nonatomic) double scalefactor;
 @property (nonatomic) CGPoint origin;
 
-- (void) pinch:(UIPinchGestureRecognizer *)gesture;
-- (void) pan:(UIPanGestureRecognizer *)gesture;
+-(void) pinch:(UIPinchGestureRecognizer *)gesture;
+-(void) pan:(UIPanGestureRecognizer *)gesture;
 
 @end

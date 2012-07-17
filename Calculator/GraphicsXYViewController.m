@@ -10,8 +10,12 @@
 #import "GraphicsXYView.h"
 #import "CalculatorBrain.h"
 
-@implementation GraphicsXYViewController
+@interface GraphicsXYViewController ()
+@property (nonatomic, readonly) UIBarButtonItem *splitViewBarButtonItem;  
+@end
 
+@implementation GraphicsXYViewController
+@synthesize toolbar = _toolbar, splitViewBarButtonItem = _splitViewBarButtonItem;
 @synthesize graphicsView = _graphicsView, program = _program;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,8 +45,20 @@
 - (void)viewDidUnload
 {
     [self setGraphicsView:nil];
+    [self setToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+        if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+        if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+        self.toolbar.items = toolbarItems;
+        _splitViewBarButtonItem = splitViewBarButtonItem;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -64,12 +80,16 @@
     return [CalculatorBrain runProgram:self.program usingVariableValues:variableValues];
 }
 
-/*
-#pragma mark - Split view
+- (void) setProgram:(id)program {
+    _program = program;
+    [self.graphicsView setNeedsDisplay]; 
+}
 
+#pragma mark - Split view
+/*
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    barButtonItem.title = NSLocalizedString(@"Calculator", @"Calculator");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
@@ -81,5 +101,4 @@
     self.masterPopoverController = nil;
 }
 */
-
 @end
