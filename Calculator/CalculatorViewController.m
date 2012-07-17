@@ -101,6 +101,10 @@
     }
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return self.splitViewController != nil;
+}
+
 - (void)viewDidUnload {
     [self setHistory:nil];
     [super viewDidUnload];

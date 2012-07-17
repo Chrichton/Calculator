@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GraphicsXYView.h"
 
-@interface GraphicsXYViewController : UIViewController<GraphicsDatasource>
+@interface GraphicsXYViewController : UIViewController<GraphicsDatasource, UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet GraphicsXYView *graphicsView;
 @property (nonatomic) id program;
