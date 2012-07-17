@@ -94,6 +94,14 @@
         self.display.text = [self.display.text substringToIndex:self.display.text.length -1];
 }
 
+- (IBAction)graphPressed:(id)sender {
+    if (self.splitViewController) {
+        GraphicsXYViewController *graphicsContoller = self.splitViewController.viewControllers.lastObject;
+        graphicsContoller.program = self.brain.program;
+ 
+    }
+}
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"graphics"]) {
         GraphicsXYViewController *controller = [segue destinationViewController];

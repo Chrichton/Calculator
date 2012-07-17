@@ -431,6 +431,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="graphPressed:" destination="tl9-3K-EAL" eventType="touchUpInside" id="bnX-xq-ZJW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -447,24 +450,6 @@
             <point key="canvasLocation" x="-774" y="-1006"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="history" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GraphicsXYView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphicsXYView.h"/>
-        </class>
-        <class className="GraphicsXYViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphicsXYViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphicsView" candidateClass="GraphicsXYView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
