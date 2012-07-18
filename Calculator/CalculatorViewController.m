@@ -109,12 +109,6 @@
     }
 }
 
-- (void)awakeFromNib
-{
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-    [super awakeFromNib];
-}
-
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return self.splitViewController != nil;
 }
