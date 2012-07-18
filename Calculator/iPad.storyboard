@@ -461,7 +461,6 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="3jd-U4-koY"/>
                     <value key="contentSizeForViewInPopover" type="size" width="320" height="400"/>
                     <connections>
                         <outlet property="display" destination="hHq-Ys-1Ie" id="Lfb-w9-eog"/>
