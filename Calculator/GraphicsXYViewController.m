@@ -11,11 +11,12 @@
 #import "CalculatorBrain.h"
 
 @interface GraphicsXYViewController ()
-@property (nonatomic, readonly) UIBarButtonItem *splitViewBarButtonItem;  
+
 @end
 
 @implementation GraphicsXYViewController
-@synthesize toolbar = _toolbar, splitViewBarButtonItem = _splitViewBarButtonItem;
+@synthesize descriptionBarButtonitem = _descriptionBarButtonitem;
+@synthesize toolbar = _toolbar;
 @synthesize graphicsView = _graphicsView, program = _program;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,19 +47,9 @@
 {
     [self setGraphicsView:nil];
     [self setToolbar:nil];
+    [self setDescriptionBarButtonitem:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-}
-
-- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
-{
-    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
-        NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
-        if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
-        if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-        self.toolbar.items = toolbarItems;
-        _splitViewBarButtonItem = splitViewBarButtonItem;
-    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -82,23 +73,26 @@
 
 - (void) setProgram:(id)program {
     _program = program;
+    
+    self.descriptionBarButtonitem.title = [CalculatorBrain descriptionOfTheProgram:program];
     [self.graphicsView setNeedsDisplay]; 
 }
 
 #pragma mark - Split view
-/*
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
     barButtonItem.title = NSLocalizedString(@"Calculator", @"Calculator");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems insertObject:barButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
 }
 
 - (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems removeObject:barButtonItem];
+    self.toolbar.items = toolbarItems;
 }
-*/
+
 @end

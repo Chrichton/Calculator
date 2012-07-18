@@ -11,6 +11,7 @@
 
 @interface GraphicsXYViewController : UIViewController<GraphicsDatasource, UISplitViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *descriptionBarButtonitem;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet GraphicsXYView *graphicsView;
 @property (nonatomic) id program;
