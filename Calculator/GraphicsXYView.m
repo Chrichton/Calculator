@@ -33,10 +33,13 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
     CGContextSetStrokeColorWithColor(context, [[UIColor blueColor] CGColor]);
     CGContextBeginPath(context);
     
+    CGPoint origin = self.origin;
+    int scalefactor = self.scalefactor;
+    
     for (int i = 0; i < rect.size.width * self.contentScaleFactor; i++) {
         CGFloat pixel = i / self.contentScaleFactor;
-        double x = ( pixel - self.origin.x) / self.scalefactor;
-        double y = -[self.datasource getValueForX:x] * self.scalefactor + self.origin.y;
+        double x = ( pixel - origin.x) / scalefactor;
+        double y = -[self.datasource getValueForX:x] * scalefactor + origin.y;
         
         if(!isinf(y) && !isnan(y)) {
             if (i == 0) 
