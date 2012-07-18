@@ -113,6 +113,12 @@
     return self.splitViewController != nil;
 }
 
+-(void) awakeFromNib {
+    [super awakeFromNib];
+    
+    self.splitViewController.presentsWithGesture = NO;
+}
+
 - (void)viewDidUnload {
     [self setHistory:nil];
     [super viewDidUnload];
