@@ -11,7 +11,7 @@
 
 @implementation GraphicsXYView 
 
-@synthesize scalefactor = _scalefactor, origin = _origin, datasource = _datasource;
+@synthesize scalefactor = _scalefactor, origin = _origin, datasource = _datasource, lineMode = _lineMode;
 
 static NSString *scalefactorKey = @"GraphicsXYView.ScalefactorKey";
 static NSString *originKey = @"GraphicsXYView.OriginKey";
@@ -31,6 +31,8 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [[UIColor blueColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
+    
     CGContextBeginPath(context);
     
     CGPoint origin = self.origin;
@@ -42,10 +44,14 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
         double y = -[self.datasource getValueForX:x] * scalefactor + origin.y;
         
         if(!isinf(y) && !isnan(y)) {
-            if (i == 0) 
-                CGContextMoveToPoint(context, pixel, y);
-            else    
-                CGContextAddLineToPoint(context, pixel, y);
+            if (self.lineMode) {
+                if (i == 0) 
+                    CGContextMoveToPoint(context, pixel, y);
+                else    
+                    CGContextAddLineToPoint(context, pixel, y);
+            } else {
+                CGContextFillEllipseInRect(context, CGRectMake(pixel, y, 1, 1));
+            }
         }
     }
                              
@@ -86,6 +92,11 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
 
 - (void) setDatasource:(id<GraphicsDatasource>)datasource {    
     _datasource = datasource;
+    [self setNeedsDisplay];
+}
+
+-(void) setLineMode:(BOOL)lineMode {
+    _lineMode = lineMode;
     [self setNeedsDisplay];
 }
 

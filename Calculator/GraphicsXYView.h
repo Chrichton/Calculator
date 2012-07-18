@@ -21,6 +21,7 @@
 @property (nonatomic, weak) id<GraphicsDatasource> datasource;
 @property (nonatomic) double scalefactor;
 @property (nonatomic) CGPoint origin;
+@property (nonatomic) BOOL lineMode;
 
 -(void) pinch:(UIPinchGestureRecognizer *)gesture;
 -(void) pan:(UIPanGestureRecognizer *)gesture;

@@ -14,13 +14,13 @@
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic) NSDictionary *testVariableValues;
-
+@property (nonatomic) BOOL lineMode;
 @end
 
 @implementation CalculatorViewController
 @synthesize history = _history;
 @synthesize display = _display, brain = _brain, userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber, 
-    testVariableValues = _testVariableValues;
+    testVariableValues = _testVariableValues, lineMode = _lineMode;
 
 - (CalculatorBrain *)brain {
     if (!_brain)
@@ -98,7 +98,15 @@
     if (self.splitViewController) {
         GraphicsXYViewController *graphicsContoller = self.splitViewController.viewControllers.lastObject;
         graphicsContoller.program = self.brain.program;
- 
+        graphicsContoller.graphicsView.lineMode = self.lineMode;
+    }
+}
+
+- (IBAction)lineModeChanged:(UISwitch *)sender {
+    self.lineMode = sender.on;
+    if (self.splitViewController) {
+        GraphicsXYViewController *graphicsContoller = self.splitViewController.viewControllers.lastObject;
+        graphicsContoller.graphicsView.lineMode = self.lineMode;
     }
 }
 
@@ -106,6 +114,7 @@
     if ([segue.identifier isEqualToString:@"graphics"]) {
         GraphicsXYViewController *controller = [segue destinationViewController];
         controller.program = self.brain.program;
+        controller.graphicsView.lineMode = self.lineMode;
     }
 }
 
@@ -117,6 +126,7 @@
     [super awakeFromNib];
     
     self.splitViewController.presentsWithGesture = NO;
+    self.lineMode = YES;
 }
 
 - (void)viewDidUnload {
