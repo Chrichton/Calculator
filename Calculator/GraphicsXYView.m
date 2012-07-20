@@ -36,7 +36,7 @@ static NSString *originKey = @"GraphicsXYView.OriginKey";
     CGContextBeginPath(context);
     
     CGPoint origin = self.origin;
-    int scalefactor = self.scalefactor;
+    double scalefactor = self.scalefactor;
     
     for (int i = 0; i < rect.size.width * self.contentScaleFactor; i++) {
         CGFloat pixel = i / self.contentScaleFactor;
