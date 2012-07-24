@@ -25,6 +25,7 @@
 		FF15BBCE159B647F0041AD68 /* CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF15BBCD159B647F0041AD68 /* CalculatorTests.m */; };
 		FF15BBD9159B6E610041AD68 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = FF15BBD8159B6E610041AD68 /* CalculatorBrain.m */; };
 		FF51D22B15B3C8D5000050FB /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF51D22A15B3C8D5000050FB /* iPad.storyboard */; };
+		FF7BA6D515BEF0D400B9BBC7 /* GraphicsFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7BA6D415BEF0D400B9BBC7 /* GraphicsFavoritesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		FF15BBD7159B6E610041AD68 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		FF15BBD8159B6E610041AD68 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
 		FF51D22A15B3C8D5000050FB /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
+		FF7BA6D315BEF0D400B9BBC7 /* GraphicsFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsFavoritesViewController.h; sourceTree = "<group>"; };
+		FF7BA6D415BEF0D400B9BBC7 /* GraphicsFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsFavoritesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 		FF06618115AF3A7600978BB4 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				FF7BA6D315BEF0D400B9BBC7 /* GraphicsFavoritesViewController.h */,
+				FF7BA6D415BEF0D400B9BBC7 /* GraphicsFavoritesViewController.m */,
 				FF06618315AF3AA300978BB4 /* AxesDrawer.h */,
 				FF06618415AF3AA300978BB4 /* AxesDrawer.m */,
 				FF06618615AF3AD300978BB4 /* GraphicsXYView.h */,
@@ -298,6 +303,7 @@
 				FF06618515AF3AA300978BB4 /* AxesDrawer.m in Sources */,
 				FF06618815AF3AD300978BB4 /* GraphicsXYView.m in Sources */,
 				FF06618B15AF43AB00978BB4 /* GraphicsXYViewController.m in Sources */,
+				FF7BA6D515BEF0D400B9BBC7 /* GraphicsFavoritesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

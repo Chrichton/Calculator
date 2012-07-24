@@ -22,11 +22,35 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Tn3-MZ-5WN"/>
                                     <barButtonItem style="plain" id="BYe-ly-DLz"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="MiV-56-MaU"/>
+                                    <barButtonItem title="Favoriten" id="Em1-Ml-7wY">
+                                        <connections>
+                                            <segue destination="XST-4w-ywX" kind="popover" identifier="GraphicFavorites" popoverAnchorBarButtonItem="Em1-Ml-7wY" id="xqc-W9-jw8">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <view contentMode="redraw" id="wWk-R0-Kz8" customClass="GraphicsXYView">
                                 <rect key="frame" x="0.0" y="44" width="703" height="740"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9eF-fd-Pws">
+                                        <rect key="frame" x="610" y="634" width="75" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Favorit">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addFavoritesClicked:" destination="Nbl-IY-SXJ" eventType="touchUpInside" id="TMQ-sq-qYy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -41,7 +65,47 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-800" y="-63"/>
+            <point key="canvasLocation" x="-1012" y="-843"/>
+        </scene>
+        <!--Graphics Favorites View Controller-->
+        <scene sceneID="ec2-EH-jdb">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="otj-PR-tPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="XST-4w-ywX" customClass="GraphicsFavoritesViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dgc-3x-Nsz">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphicFavoritesCell" textLabel="ceq-1R-9Up" style="IBUITableViewCellStyleDefault" id="NNR-Jx-BaV">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ceq-1R-9Up">
+                                            <rect key="frame" x="10" y="0.0" width="748" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XST-4w-ywX" id="hUT-Cy-xp4"/>
+                            <outlet property="delegate" destination="XST-4w-ywX" id="vEe-Sg-TRW"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-134" y="-951"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="T9s-cF-kcG">
@@ -56,7 +120,7 @@
                     </connections>
                 </splitViewController>
             </objects>
-            <point key="canvasLocation" x="-1985" y="-503"/>
+            <point key="canvasLocation" x="-2197" y="-1283"/>
         </scene>
         <!--Calculator View Controller-->
         <scene sceneID="PWE-vq-BSv">
@@ -489,7 +553,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-774" y="-1006"/>
+            <point key="canvasLocation" x="-986" y="-1786"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
