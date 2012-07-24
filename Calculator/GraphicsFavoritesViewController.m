@@ -14,7 +14,7 @@
 
 @implementation GraphicsFavoritesViewController
 
-@synthesize favorites =_favorites;
+@synthesize favorites =_favorites, selection = _selection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -109,13 +109,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSString *key = [self.favorites.allKeys objectAtIndex:indexPath.row];
+    id program = [self.favorites valueForKey:key];
+    [self.selection controller:self didSelect:program];
 }
 
 @end

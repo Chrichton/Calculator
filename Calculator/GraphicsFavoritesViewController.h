@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class GraphicsFavoritesViewController;
+
+@protocol GraphicFavoriteSelected <NSObject>
+        
+- (void) controller: (GraphicsFavoritesViewController *) controller didSelect: (id) program;
+
+@end
+
 @interface GraphicsFavoritesViewController : UITableViewController
+
 @property (nonatomic, strong) NSDictionary *favorites;
+@property (nonatomic, weak) id<GraphicFavoriteSelected> selection;
+
 @end

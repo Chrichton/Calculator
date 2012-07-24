@@ -9,15 +9,21 @@
 #import "GraphicsXYViewController.h"
 #import "GraphicsXYView.h"
 #import "CalculatorBrain.h"
-#import "GraphicsFavoritesViewController.h"
+
 @interface GraphicsXYViewController ()
 @property (nonatomic, strong) NSMutableDictionary *favorites;
+@property (weak, nonatomic) IBOutlet UIButton *addFavoriteButton;
+
 @end
 
 @implementation GraphicsXYViewController
+@synthesize addFavoriteButton = _addFavoriteButton;
+
 @synthesize descriptionBarButtonitem = _descriptionBarButtonitem;
 @synthesize toolbar = _toolbar;
 @synthesize graphicsView = _graphicsView, program = _program, favorites = _favorites;
+
+#define FAVORITES_KEY @"GraphicsFavoritesKey"
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +48,11 @@
     tapRecognizer.numberOfTapsRequired = 3;
     [self.graphicsView addGestureRecognizer:tapRecognizer];
     
-    self.favorites = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"P1", @"F1", @"P2", @"F2" ,nil];
+    self.favorites = [[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY] mutableCopy];
+    if (!self.favorites)
+        self.favorites = [[NSMutableDictionary alloc] init];
+    
+    self.addFavoriteButton.enabled = NO;
 }
 
 - (void)viewDidUnload
@@ -50,6 +60,7 @@
     [self setGraphicsView:nil];
     [self setToolbar:nil];
     [self setDescriptionBarButtonitem:nil];
+    [self setAddFavoriteButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -76,6 +87,7 @@
 - (void) setProgram:(id)program {
     _program = program;
     
+    self.addFavoriteButton.enabled = program != nil;
     self.descriptionBarButtonitem.title = [CalculatorBrain descriptionOfTheProgram:program];
     [self.graphicsView setNeedsDisplay]; 
 }
@@ -100,11 +112,18 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"GraphicFavorites"]) {
         GraphicsFavoritesViewController *controller = [segue destinationViewController];
+        controller.selection = self;
         controller.favorites = [self.favorites copy];
     }
 }
 
 - (IBAction)addFavoritesClicked:(id)sender {
-    [self.favorites setValue:@"P3" forKey:@"F3"];
+    [self.favorites setObject:self.program forKey:[CalculatorBrain descriptionOfTheProgram:self.program]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.favorites forKey:FAVORITES_KEY];
 }
+
+- (void) controller:(GraphicsFavoritesViewController *)controller didSelect:(id)program {
+    self.program = program;
+}
+
 @end

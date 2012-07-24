@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GraphicsXYView.h"
+#import "GraphicsFavoritesViewController.h"
 
-@interface GraphicsXYViewController : UIViewController<GraphicsDatasource, UISplitViewControllerDelegate>
+@interface GraphicsXYViewController : UIViewController<GraphicsDatasource, UISplitViewControllerDelegate, GraphicFavoriteSelected>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *descriptionBarButtonitem;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
