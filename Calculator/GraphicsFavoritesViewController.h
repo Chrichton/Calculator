@@ -13,6 +13,7 @@
 @protocol GraphicFavoriteSelected <NSObject>
         
 - (void) controller: (GraphicsFavoritesViewController *) controller didSelect: (id) program;
+- (void) controller: (GraphicsFavoritesViewController *) controller didDelete: (NSString *)programName;
 
 @end
 

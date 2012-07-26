@@ -113,7 +113,7 @@
     if ([segue.identifier isEqualToString:@"GraphicFavorites"]) {
         GraphicsFavoritesViewController *controller = [segue destinationViewController];
         controller.selection = self;
-        controller.favorites = [self.favorites copy];
+        controller.favorites = self.favorites;
     }
 }
 
@@ -124,6 +124,12 @@
 
 - (void) controller:(GraphicsFavoritesViewController *)controller didSelect:(id)program {
     self.program = program;
+}
+
+- (void) controller:(GraphicsFavoritesViewController *)controller didDelete:(NSString *)programName {
+    [self.favorites removeObjectForKey:programName];
+    controller.favorites = self.favorites;
+    [[NSUserDefaults standardUserDefaults] setObject:self.favorites forKey:FAVORITES_KEY];
 }
 
 @end
